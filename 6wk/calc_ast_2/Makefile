@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ==== Portable Makefile for calc_ast (Linux & macOS) =========================
 # Files: parser.y, scanner.l, ast.c, ast.h, main.c
 # Output: ./calc_ast
@@ -86,6 +87,8 @@ clean:
 distclean: clean
 	$(RM) $(APP)
 =======
+=======
+>>>>>>> 5946211 (2nd example)
 CC = gcc
 LEX = flex
 YACC = bison
@@ -109,4 +112,7 @@ lex.yy.c: scanner.l
 
 clean:
 	rm -f $(TARGET) $(GENS)
+<<<<<<< HEAD
+>>>>>>> 5946211 (2nd example)
+=======
 >>>>>>> 5946211 (2nd example)
