@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # ==== Portable Makefile for calc_ast (Linux & macOS) =========================
 # Files: parser.y, scanner.l, ast.c, ast.h, main.c
 # Output: ./calc_ast
@@ -47,72 +45,42 @@ all: $(APP)
 
 # 최종 바이너리
 $(APP): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+    $(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
 # bison: parser.y -> parser.tab.c / parser.tab.h
 parser.tab.c parser.tab.h: parser.y
-	$(BISON) -Wall -Wcounterexamples -d -o parser.tab.c $<
+    $(BISON) -Wall -Wcounterexamples -d -o parser.tab.c $<
 
 # flex: scanner.l -> lex.yy.c  (parser.tab.h가 먼저 필요)
 lex.yy.c: scanner.l parser.tab.h
-	$(FLEX) -o $@ $<
+    $(FLEX) -o $@ $<
 
 # C 컴파일 규칙
 %.o: %.c ast.h parser.tab.h
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+    $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # flex/bison 산출물도 오브젝트로
 lex.yy.o: lex.yy.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+    $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 parser.tab.o: parser.tab.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+    $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # 편의: 버전 확인
 versions:
-	@echo "CC     = $(shell $(CC) --version | head -n1)"
-	@echo "BISON  = $(shell $(BISON) --version | head -n1)"
-	@echo "FLEX   = $(shell $(FLEX) --version  | head -n1)"
-	@echo "OS     = $(UNAME_S)"
-	@echo "BREW   = $(BREW_PREFIX)"
+    @echo "CC     = $(shell $(CC) --version | head -n1)"
+    @echo "BISON  = $(shell $(BISON) --version | head -n1)"
+    @echo "FLEX   = $(shell $(FLEX) --version  | head -n1)"
+    @echo "OS     = $(UNAME_S)"
+    @echo "BREW   = $(BREW_PREFIX)"
 
 # 실행 헬퍼
 run: $(APP)
-	./$(APP)
+    ./$(APP)
 
 # 정리
 clean:
-	$(RM) $(OBJ) lex.yy.c parser.tab.c parser.tab.h
+    $(RM) $(OBJ) lex.yy.c parser.tab.c parser.tab.h
 
 distclean: clean
-	$(RM) $(APP)
-=======
-=======
->>>>>>> 5946211 (2nd example)
-CC = gcc
-LEX = flex
-YACC = bison
-CFLAGS = -Wall -Wextra -O2
-
-GENS = lex.yy.c parser.tab.c parser.tab.h
-SRCS = ast.c main.c
-OBJS = $(GENS) $(SRCS)
-TARGET = calc_ast
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
-
-parser.tab.c parser.tab.h: parser.y
-	$(YACC) -d parser.y
-
-lex.yy.c: scanner.l
-	$(LEX) scanner.l
-
-clean:
-	rm -f $(TARGET) $(GENS)
-<<<<<<< HEAD
->>>>>>> 5946211 (2nd example)
-=======
->>>>>>> 5946211 (2nd example)
+    $(RM) $(APP)
